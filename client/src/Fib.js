@@ -44,7 +44,7 @@ class Fib extends Component {
         </div>
       );
     }
-    return this.state.values.map();
+    return entries;
   }
 
   render() {
