@@ -1,0 +1,23 @@
+language: generic 
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t aliwatters/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true USERNAME/react-test npm test
+
+after_success:
+  - docker build -t aliwatters/dkcc-client ./client
+  - docker build -t aliwatters/dkcc-server ./server
+  - docker build -t aliwatters/dkcc-nginx ./nginx
+  - docker build -t aliwatters/dkcc-worker ./worker
+  # login to docker CLI
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  # push images to dockerhub (or aws/do etc)
+  - docker push aliwatters/dkcc-client 
+  - docker push aliwatters/dkcc-nginx 
+  - docker push aliwatters/dkcc-server 
+  - docker push aliwatters/dkcc-worker 
