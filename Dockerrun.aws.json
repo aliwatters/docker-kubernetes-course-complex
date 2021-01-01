@@ -1,0 +1,31 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "dkcc-client",
+      "image": "aliwatters/dkcc-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "dkcc-server",
+      "image": "aliwatters/dkcc-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "dkcc-worker",
+      "image": "aliwatters/dkcc-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "dkcc-nginx",
+      "image": "aliwatters/dkcc-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [{ "hostPort": "80", "containerPort": 80 }],
+      "links": ["dkcc-client", "dkcc-server"]
+    }
+  ]
+}
