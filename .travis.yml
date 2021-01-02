@@ -20,4 +20,16 @@ after_success:
   - docker push aliwatters/dkcc-client 
   - docker push aliwatters/dkcc-nginx 
   - docker push aliwatters/dkcc-server 
-  - docker push aliwatters/dkcc-worker 
+  - docker push aliwatters/dkcc-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "dkcc"
+  env: "Dkcc-env"
+  bucket_name: "elasticbeanstalk-us-east-2-621861701423"
+  bucket_path: "dkcc"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
