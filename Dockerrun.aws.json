@@ -5,19 +5,22 @@
       "name": "dkcc-client",
       "image": "aliwatters/dkcc-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "dkcc-server",
       "image": "aliwatters/dkcc-server",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "dkcc-worker",
       "image": "aliwatters/dkcc-worker",
       "hostname": "worker",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "dkcc-nginx",
@@ -25,7 +28,8 @@
       "hostname": "nginx",
       "essential": true,
       "portMappings": [{ "hostPort": "80", "containerPort": 80 }],
-      "links": ["dkcc-client", "dkcc-server"]
+      "links": ["dkcc-client", "dkcc-server"],
+      "memory": 128
     }
   ]
 }
